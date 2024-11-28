@@ -1,0 +1,75 @@
+[
+      {
+        "name": "Animal Planet",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Animal_Planet_HD.png",
+        "url": "https://8088yyydplus.vercel.app/Api/AnimalPlanet.m3u8",
+        "group": "Discovery+"
+      },
+      {
+        "name": "DMAX",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/DMAX_BLACK.svg/500px-DMAX_BLACK.svg.png",
+        "url": "https://8088yyydplus.vercel.app/Api/DMAX.m3u8",
+        "group": "Discovery+"
+      },
+      {
+        "name": "Discovery Channel",
+        "logo": "https://logodownload.org/wp-content/uploads/2017/04/discovery-channel-logo-2-1.png",
+        "url": "https://8088yyydplus.vercel.app/Api/DiscoveryChannel.m3u8",
+        "group": "Discovery+"
+      },
+      {
+        "name": "Discovery Kids",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/2016_Discovery_Kids_logo.svg/500px-2016_Discovery_Kids_logo.svg.png",
+        "url": "https://8088yyydplus.vercel.app/Api/DiscoveryKids.m3u8",
+        "group": "Discovery+"
+      },
+      {
+        "name": "Discovery Science",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Discovery_Science.png",
+        "url": "https://8088yyydplus.vercel.app/Api/DiscoveryScience.m3u8",
+        "group": "Discovery+"
+      },
+      {
+        "name": "Discovery Turbo",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Discovery_Turbo.png",
+        "url": "https://8088yyydplus.vercel.app/Api/DiscoveryTurbo.m3u8",
+        "group": "Discovery+"
+      },
+      {
+        "name": "Eurosport",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Dsports.png",
+        "url": "https://8088yyydplus.vercel.app/Api/Eurosport.m3u8",
+        "group": "Discovery+"
+      },
+      {
+        "name": "Food Network",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Food_Network_logo.svg/500px-Food_Network_logo.svg.png",
+        "url": "https://8088yyydplus.vercel.app/Api/FoodNetwork.m3u8",
+        "group": "Discovery+"
+      },
+      {
+        "name": "HGTV",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/HGTV_2010.svg/500px-HGTV_2010.svg.png",
+        "url": "https://8088yyydplus.vercel.app/Api/HGTV.m3u8",
+        "group": "Discovery+"
+      },
+      {
+        "name": "Investigation Discovery",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/ID.png",
+        "url": "https://8088yyydplus.vercel.app/Api/InvestigationDiscovery.m3u8",
+        "group": "Discovery+"
+      },
+      {
+        "name": "TLC",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/TLC_HD_World.png",
+        "url": "https://8088yyydplus.vercel.app/Api/TLC.m3u8",
+        "group": "Discovery+"
+      },
+      {
+        "name": "TRVL Channel",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/2018_Travel_Channel_logo.svg/500px-2018_Travel_Channel_logo.svg.png",
+        "url": "https://8088yyydplus.vercel.app/Api/TRVLChannel.m3u8",
+        "group": "Discovery+"
+      }
+    ]
+  

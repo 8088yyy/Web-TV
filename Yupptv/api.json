@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Puthiya Thalaimurai",
+    "logo": "https://d229kpbsb5jevy.cloudfront.net/tv/150/150/bnw/puthiyathalaimurai-black.png",
+    "url": "https://segment.yuppcdn.net/240122/puthiya/playlist.m3u8"
+  },
+  {
+    "name": "Polimer News",
+    "logo": "https://d229kpbsb5jevy.cloudfront.net/tv/150/150/bnw/polimer-news-black.png",
+    "url": "https://segment.yuppcdn.net/110322/polimernews/playlist.m3u8"
+  },
+  {
+    "name": "News7 Tamil",
+    "logo": "https://d229kpbsb5jevy.cloudfront.net/tv/150/150/bnw/news7tamil-black.png",
+    "url": "https://yuppmedtaorire.akamaized.net/v1/master/a0d007312bfd99c47f76b77ae26b1ccdaae76cb1/news7_nim_https/240122/news7/playlist.m3u8"
+  },
+  {
+    "name": "Thanthi TV",
+    "logo": "https://d229kpbsb5jevy.cloudfront.net/tv/150/150/bnw/thanthi-tv-black.png",
+    "url": "https://segment.yuppcdn.net/110322/thanthi/playlist.m3u8"
+  },
+  {
+    "name": "Sirippoli TV",
+    "logo": "https://d229kpbsb5jevy.cloudfront.net/tv/150/150/bnw/sirippoli-tv-black.png",
+    "url": "https://segment.yuppcdn.net/240122/siripoli/playlist.m3u8"
+  },
+  {
+    "name": "Kalaignar TV",
+    "logo": "https://d229kpbsb5jevy.cloudfront.net/tv/150/150/bnw/kalaignar-tv-black.png",
+    "url": "https://segment.yuppcdn.net/240122/kalaignartv/playlist.m3u8"
+  },
+  {
+    "name": "Shakthi TV",
+    "logo": "https://d229kpbsb5jevy.cloudfront.net/tv/150/150/bnw/shakthi-tv-white.png",
+    "url": "https://edge3-moblive.yuppcdn.net/transsd/smil:saktv10.smil/playlist.m3u8"
+  },
+  {
+    "name": "Star Tamil",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlCN4vwNXfIJKcU7EY82QcBa9wek5Fv5kJCw&s",
+    "url": "https://edge2-moblive.yuppcdn.net/trans1sd/smil:strtml19.smil/playlist.m3u8"
+  },
+  {
+    "name": "Thalaa TV",
+    "logo": "https://d229kpbsb5jevy.cloudfront.net/tv/150/150/bnw/thala_tv_512X512_balck.png",
+    "url": "https://streams2.sofast.tv/ptnr-yupptv/title-THALAA-TV-TAM_yupptv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/2069c593-3c07-4d62-9d44-746be5c3a5d6/manifest.m3u8"
+  },
+  {
+    "name": "Murasu",
+    "logo": "https://d229kpbsb5jevy.cloudfront.net/tv/150/150/bnw/murasu-white.png",
+    "url": "https://segment.yuppcdn.net/050522/murasu/playlist.m3u8"
+  },
+  {
+    "name": "Isai Aruvi",
+    "logo": "https://d229kpbsb5jevy.cloudfront.net/tv/150/150/bnw/isai-aruvi-black.png",
+    "url": "https://segment.yuppcdn.net/140622/isaiaruvi/playlist.m3u8"
+  },
+  {
+    "name": "Vasantham TV",
+    "logo": "https://d229kpbsb5jevy.cloudfront.net/tv/150/150/bnw/vasantham-tv-white.png",
+    "url": "https://edge2-moblive.yuppcdn.net/trans1sd/smil:vatv07.smil/playlist.m3u8"
+  },
+  {
+    "name": "TNL TV",
+    "logo": "https://tnltv.lk/images/logos/logo/tnltv.png",
+    "url": "https://edge3-moblive.yuppcdn.net/transsd/smil:tnl12.smil/playlist.m3u8?dvr"
+  },
+  {
+    "name": "TV One",
+    "logo": "https://yt3.googleusercontent.com/9dHiDNnXWs2WD2kT7x06PBcC8NILQzkzd5uUv5higmbJK1G14Gy2jKW_sh9R6F1fu0Y0fsoYgA=s900",
+    "url": "https://edge4-moblive.yuppcdn.net/trans1sd/smil:tv111.smil/playlist.m3u8"
+  },
+  {
+    "name": "ITN Srilanka",
+    "logo": "https://yt3.googleusercontent.com/7BNxzX2gTLtNlpZZ0J6A83a7yhQ5QmZAbI3Ztlpo_0cKalWhUAXKAIJWsG9zy7joVfNUkyE=s900",
+    "url": "https://edge4-moblive.yuppcdn.net/transsd/smil:itn43.smil/playlist.m3u8"
+  },
+  {
+    "name": "Channel Eye",
+    "logo": "https://channeleye.lk/wp-content/uploads/2022/05/1-1.png",
+    "url": "https://edge4-moblive.yuppcdn.net/trans1sd/smil:nettv15.smil/playlist.m3u8"
+  },
+  {
+    "name": "Siyatha TV",
+    "logo": "https://siyathatv.lk/wp-content/themes/siyathatv-vol-008/images/siyathatv-logo.jpg",
+    "url": "https://edge3-moblive.yuppcdn.net/transhd2/smil:siytv08.smil/playlist.m3u8?dvr"
+  },
+  {
+    "name": "Swarnawahini",
+    "logo": "https://yt3.googleusercontent.com/ytc/AIdro_nYHp0N9dLUz8PFZe-LxtCCMYpbWSmenGBl4zY39Ge6SwY=s900",
+    "url": "https://edge4-moblive.yuppcdn.net/transsd/smil:swani06.smil/playlist.m3u8?dvr"
+  },
+  {
+    "name": "Sirasa TV",
+    "logo": "https://sirasatv.lk/assets/images/Sirasa_TV_Logo.png",
+    "url": "https://edge2-moblive.yuppcdn.net/transsd/smil:sirtv09.smil/playlist.m3u8?dvr"
+  },
+  {
+    "name": "Hiru TV",
+    "logo": "https://www.hirutv.lk/assets/images/logo.png",
+    "url": "https://edge4-moblive.yuppcdn.net/transhd2/smil:hitv17.smil/index.m3u8"
+  },
+  {
+    "name": "TV Derana",
+    "logo": "https://yt3.googleusercontent.com/ZaG0AcUC38WcLMe1_qaWOKwYtMfDsunrwkOpbw2bDjxz6hr8QwxjB3Vv932q-5Ic-pCzqLPN=s900",
+    "url": "https://edge2-moblive.yuppcdn.net/transhd2/smil:detv04.smil/index.m3u8"
+  },
+  {
+    "name": "Rupavahini TV",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn2E7hFLq3iB7jB7GYnOgEvBTSp8qFr--a6A&s",
+    "url": "https://edge2-moblive.yuppcdn.net/transsd/smil:runi01.smil/playlist.m3u8?dvr"
+  }
+]
