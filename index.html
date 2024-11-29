@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>8088yy TV</title>
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-medium: #1E1E1E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: var(--text-primary);
+            font-size: 2.2rem;
+            font-weight: 5500;
+        }
+
+        .telegram-btn {
+            background-color: #0088cc;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color var(--transition-speed);
+        }
+
+        .telegram-btn:hover {
+            background-color: #006699;
+        }
+
+        .file-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .directory-item {
+            background-color: var(--bg-medium);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            
+        }
+
+        .directory-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .directory-item img {
+            max-width: 150px;
+            max-height: 150px;
+            margin-bottom: 15px;
+            object-fit: contain;
+        }
+
+        .directory-item a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .file-container {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+
+            .directory-item img {
+                max-width: 100px;
+                max-height: 100px;
+            }
+
+            .directory-item a {
+                font-size: 0.9rem;
+                
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>8088yy TV</h1>
+            <a href="#" class="telegram-btn">Join Telegram</a>
+        </div>
+        <div class="file-container">
+            <div class='directory-item'><a href='Fancode Live Matches\index.html'><img src='https://upload.wikimedia.org/wikipedia/en/thumb/6/6c/FanCode_logo.svg/1200px-FanCode_logo.svg.png' alt='Fancode'></a><a href='Fancode Live Matches\index.html'>Fancode Live Matches</a></div>
+            <div class='directory-item'><a href='Sonyliv Live Matches\index.html'><img src='https://cdn.freelogovectors.net/wp-content/uploads/2021/12/sonyliv-logo-freelogovectors.net_.png' alt='Sonyliv'></a><a href='Sonyliv Live Matches\index.html'>Sonyliv Live Matches</a></div>
+            <div class='directory-item'><a href='Yupptv\index.html'><img src='https://m.media-amazon.com/images/I/41mcw3k6f5L.png' alt='Yupptv'></a><a href='Yupptv\index.html'>Yupptv</a></div>
+            <div class='directory-item'><a href='Discovery Plus\index.html'><img src='https://my24hrshop.com/storage/2021/09/discovery-plus-premium.png' alt='Discovery Plus'></a><a href='Discovery Plus\index.html'>Discovery Plus</a></div>
+            <div class='directory-item'><a href='Bigg Boss\index.html'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Bigg_Boss_Tamil_8_logo.jpg/640px-Bigg_Boss_Tamil_8_logo.jpg' alt='Bigg Boss'></a><a href='Bigg Boss\index.html'>Bigg Boss</a></div>
+        </div>
+    </div>
+</body>
+</html>
