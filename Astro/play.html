@@ -3,27 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astro Go</title>
+    <title>Channel Player</title>
     <style>
         body {
             margin: 0;
-            background-color: black;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        
+        #player {
+            position: absolute;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        #error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255,0,0,0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        #channel-logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            max-width: 100px;
+            max-height: 60px;
+            z-index: 1000;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/controls.min.css" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/shaka-player.ui.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div data-shaka-player-container style="position:absolute;z-index: -1;top: 0;left: 0;width: 100%; height: 100%;object-fit: cover;">
-        <video autoplay muted data-shaka-player id="video" style="width:100%;height:100%;"></video>
-    </div>
-
+    <img id="channel-logo" src="" alt="Channel Logo">
+    <div id="player"></div>
+    <script src="//ssl.p.jwpcdn.com/player/v/8.25.1/jwplayer.js"></script>
     <script>
-        const channels =
-  [
+        jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
+
+        // Channel configurations
+        const channels = [
   {
     "name": "Colors Hindi HD",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Colors_v1.png",
     "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/2611/default_primary.mpd",
     "license_type": "clearkey",
@@ -31,7 +60,7 @@
   },
   {
     "name": "Astro Vaanavil HD",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Astro_Vaanavil_v2.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2309/default_primary.mpd",
     "license_type": "clearkey",
@@ -39,7 +68,7 @@
   },
   {
     "name": "Astro Vinmeen HD",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Vinmeen2024.png",
     "url": "http://d1w72er2qn2fg9.cloudfront.net/vin.mpd",
     "license_type": "clearkey",
@@ -47,7 +76,7 @@
   },
   {
     "name": "Astro Vellithirai HD",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/399_144.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5073/default_ott.mpd",
     "license_type": "clearkey",
@@ -55,7 +84,7 @@
   },
   {
     "name": "Sun TV HD",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Sun_TV_v1.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2310/default_primary.mpd",
     "license_type": "clearkey",
@@ -63,7 +92,7 @@
   },
   {
     "name": "Sun Music HD",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Sun_Music_v1.png",
     "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/5011/default_primary.mpd",
     "license_type": "clearkey",
@@ -71,7 +100,7 @@
   },
   {
     "name": "Adithya",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Adithiya_v1.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/915/default_ott.mpd",
     "license_type": "clearkey",
@@ -79,7 +108,7 @@
   },
   {
     "name": "Star Vijay HD",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Star_Vijay_v1.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2707/default_ott.mpd",
     "license_type": "clearkey",
@@ -87,7 +116,7 @@
   },
   {
     "name": "Colors Tamil HD",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Colors-Tamil_v1.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2101/default_ott.mpd",
     "license_type": "clearkey",
@@ -95,7 +124,7 @@
   },
   {
     "name": "Zee Tamil HD",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/ZeeTamil_v1.png",
     "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/2311/default_primary.mpd",
     "license_type": "clearkey",
@@ -103,7 +132,7 @@
   },
   {
     "name": "ABO Movies Thangathirai HD",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Astro_BoxOffice_Movies_v1.png",
     "url": "http://d1w72er2qn2fg9.cloudfront.net/thang.mpd",
     "license_type": "clearkey",
@@ -111,7 +140,7 @@
   },
   {
     "name": "Zee Cinema",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/ZeeCinemaHD.png",
     "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/5106/default_primary.mpd",
     "license_type": "clearkey",
@@ -119,7 +148,7 @@
   },
   {
     "name": "Sun News",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Sun-News.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5087/default_primary.mpd",
     "license_type": "clearkey",
@@ -127,7 +156,7 @@
   },
   {
     "name": "Sun Life",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Sun-Life.png",
     "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/5089/default_primary.mpd",
     "license_type": "clearkey",
@@ -135,7 +164,7 @@
   },
   {
     "name": "Rusi",
-    "group": "Indian",
+    "category": "Indian",
     "logo": "https://linear-poster.astro.com.my/prod/logo/RUSI_HD.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5168/default_ott.mpd",
     "license_type": "clearkey",
@@ -143,7 +172,7 @@
   },
   {
     "name": "Astro Arena",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/AstroArena_2024.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2604/default_primary.mpd",
     "license_type": "clearkey",
@@ -151,7 +180,7 @@
   },
   {
     "name": "Astro Arena 2",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/AstroArena2_2024.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5057/default_primary.mpd",
     "license_type": "clearkey",
@@ -159,7 +188,7 @@
   },
   {
     "name": "Arena Bola",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/AstroArenaBola_2024.png",
     "url": "http://d1w72er2qn2fg9.cloudfront.net/bola1.mpd",
     "license_type": "clearkey",
@@ -167,7 +196,7 @@
   },
   {
     "name": "Arena Bola 2",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/AstroArenaBola2_2024.png",
     "url": "https://d1fk7kbmz4il3.cloudfront.net/CH5/masterCH5.mpd",
     "license_type": "clearkey",
@@ -175,7 +204,7 @@
   },
   {
     "name": "Astro Grandstand",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/AstroGrandstand_2024.png",
     "url": "https://d3ey18635ukr4v.cloudfront.net/CH1/masterCH1.mpd",
     "license_type": "clearkey",
@@ -183,7 +212,7 @@
   },
   {
     "name": "Astro Premier League",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/AstroPremierLeague_2024.png",
     "url": "http://d1w72er2qn2fg9.cloudfront.net/premier1.mpd",
     "license_type": "clearkey",
@@ -191,7 +220,7 @@
   },
   {
     "name": "Astro Premier League 2",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/AstroPremierLeague2_2024.png",
     "url": "http://d1w72er2qn2fg9.cloudfront.net/premier2.mpd",
     "license_type": "clearkey",
@@ -199,7 +228,7 @@
   },
   {
     "name": "Astro Premier League 3",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/538_144.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5108/default_primary.mpd",
     "license_type": "clearkey",
@@ -207,7 +236,7 @@
   },
   {
     "name": "Astro Football",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/AstroFootball_2024.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2506/default_primary.mpd",
     "license_type": "clearkey",
@@ -215,7 +244,7 @@
   },
   {
     "name": "Astro Badminton",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "http://linear-poster.astro.com.my/prod/logo/AstroBadminton_2024.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5170/default_primary.mpd",
     "license_type": "clearkey",
@@ -223,7 +252,7 @@
   },
   {
     "name": "Astro Sports Plus",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "http://linear-poster.astro.com.my/prod/logo/AstroSportsPlus_2024.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5171/default_ott.mpd",
     "license_type": "clearkey",
@@ -231,7 +260,7 @@
   },
   {
     "name": "beIN Sports 3",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/beIN_SPORTS3_V2.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2705/default_primary.mpd",
     "license_type": "clearkey",
@@ -239,7 +268,7 @@
   },
   {
     "name": "beIN Sports 2",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/beINSPORTS2.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5066/default_primary.mpd",
     "license_type": "clearkey",
@@ -247,7 +276,7 @@
   },
   {
     "name": "beIN Sports 1",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/beINSPORT1.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/408/default_primary.mpd",
     "license_type": "clearkey",
@@ -255,7 +284,7 @@
   },
   {
     "name": "SPOTV",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/SPOTV.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5058/default_primary.mpd",
     "license_type": "clearkey",
@@ -263,7 +292,7 @@
   },
   {
     "name": "SPOTV2",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/SPOTV2.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5079/default_ott.mpd",
     "license_type": "clearkey",
@@ -271,7 +300,7 @@
   },
   {
     "name": "Eurosport",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/logo_1701_v3.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2100/default_primary.mpd",
     "license_type": "clearkey",
@@ -279,7 +308,7 @@
   },
   {
     "name": "W-Sport",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/503_144.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5060/default_primary.mpd",
     "license_type": "clearkey",
@@ -287,7 +316,7 @@
   },
   {
     "name": "WWE Network",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/WWE_v1.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2603/default_primary.mpd",
     "license_type": "clearkey",
@@ -295,7 +324,7 @@
   },
   {
     "name": "Golf Channel",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/Golf_v1.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/1003/default_primary.mpd",
     "license_type": "clearkey",
@@ -303,7 +332,7 @@
   },
   {
     "name": "Astro Cricket",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/AstroCricket_2024.png",
     "url": "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd",
     "license_type": "clearkey",
@@ -311,7 +340,7 @@
   },
   {
     "name": "Premier Sports",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://linear-poster.astro.com.my/prod/logo/PremierSports.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2601/default_primary.mpd",
     "license_type": "clearkey",
@@ -319,7 +348,7 @@
   },
   {
     "name": "Astro Supersport UHD",
-    "group": "Sports",
+    "category": "Sports",
     "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/308_144.png",
     "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/1600/default_primary.mpd",
     "license_type": "clearkey",
@@ -327,72 +356,60 @@
   }
 ];
 
-        async function initPlayer(channel) {
-            const video = document.getElementById('video');
-            const ui = video['ui'];
-            const controls = ui.getControls();
-            const player = controls.getPlayer();
-            window.player = player;
-            window.ui = ui;
-            
-            player.configure({
-                drm: {
-                    "clearKeys": {
-                        [channel.license_key.split(':')[0]]: channel.license_key.split(':')[1]
-                    },
-                },
-                abr: {
-                    defaultBandwidthEstimate: 16888,
-                    enabled: true,
-                    restrictions: {
-                        minHeight: 359,
-                        maxHeight: 720
-                    }
-                }
-            });
-            
-            player.addEventListener('error', onPlayerErrorEvent);
-            controls.addEventListener('error', onUIErrorEvent);
-            
-            try {
-                await player.load(channel.url);
-                console.log(`Now playing: ${channel.name}`);
-            } catch (error) {
-                onPlayerError(error);
-            }
-        }
-        
-        function onPlayerErrorEvent(errorEvent) {
-            onPlayerError(errorEvent.detail);
-        }
-        
-        function onPlayerError(error) {
-            console.error('Error code', error.code, 'object', error);
-        }
-        
-        function onUIErrorEvent(errorEvent) {
-            onPlayerError(errorEvent.detail);
-        }
-        
-        function initFromUrlParam() {
+        window.onload = function() {
+            // Get channel name from URL parameter
             const urlParams = new URLSearchParams(window.location.search);
             const channelName = urlParams.get('c');
-            
-            if (channelName) {
-                const channel = channels.find(ch => ch.name === channelName);
-                if (channel) {
-                    initPlayer(channel);
-                } else {
-                    console.error(`Channel not found: ${channelName}`);
-                }
+
+            // Find the selected channel
+            const selectedChannel = channels.find(channel => channel.name === channelName);
+
+            if (!selectedChannel) {
+                alert('Channel not found!');
+                return;
             }
-        }
-        
-        document.addEventListener('shaka-ui-loaded', initFromUrlParam);
-        
-        document.addEventListener('shaka-ui-load-failed', () => {
-            console.error('Unable to load the UI library!');
-        });
+
+            // Set channel logo
+            const logoElement = document.getElementById('channel-logo');
+            logoElement.src = selectedChannel.logo;
+
+            var playerInstance = jwplayer("player");
+            
+            // Split license key into keyId and key
+            const [keyId, key] = selectedChannel.license_key.split(':');
+
+            var source = {
+                "file": selectedChannel.url,
+                "default": true
+            };
+
+            source.type = "dash";
+            source.drm = {
+                "clearkey": {
+                    "keyId": keyId,
+                    "key": key
+                }
+            };
+
+            playerInstance.setup({
+                playlist: [{
+                    "sources": [source]
+                }],
+                width: "100%",
+                height: "100%",
+                aspectratio: "16:9",
+                autostart: true,
+                cast: {
+                    appid: 'CC1AD845'
+                }
+            });
+
+            // Error handling
+            playerInstance.on('error', function(error) {
+                console.error('Player Error:', error);
+                alert('An error occurred while playing the channel.');
+            });
+        };
     </script>
 </body>
 </html>
