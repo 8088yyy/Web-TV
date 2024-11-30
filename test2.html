@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Go</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            overflow: hidden;
+            height: 100vh;
+        }
+        #video-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        #error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            z-index: 10;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.13/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.13/controls.min.css" crossorigin="anonymous">
+</head>
+<body>
+    <div id="video-container">
+        <video 
+            id="video" 
+            autoplay 
+            muted 
+            playsinline 
+            data-shaka-player
+        ></video>
+        <div id="error-message"></div>
+    </div>
+
+    <script>
+        const channels = [
+            {
+                "name": "Colors Hindi HD",
+                "group": "Indian",
+                "logo": "https://linear-poster.astro.com.my/prod/logo/Colors_v1.png",
+                "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2310/default_primary.mpd",
+                "license_type": "clearkey",
+                "license_key": "3dab4b5f1b214e358e5d76c656fdcb10:73f40a68e5e4f93d40eb85a34f261a08"
+            }
+        ];
+
+        async function initPlayer(channel) {
+            const video = document.getElementById('video');
+            const errorMessageEl = document.getElementById('error-message');
+
+            // Create Shaka Player
+            const player = new shaka.Player(video);
+            const ui = new shaka.ui.Overlay(player, video, video);
+
+            // Configure player
+            player.configure({
+                drm: {
+                    "clearKeys": {
+                        [channel.license_key.split(':')[0]]: channel.license_key.split(':')[1]
+                    },
+                },
+                streaming: {
+                    rebufferingGoal: 15,
+                    bufferBehind: 30,
+                    bufferingGoal: 10
+                },
+                abr: {
+                    defaultBandwidthEstimate: 16888,
+                    enabled: true,
+                    restrictions: {
+                        minHeight: 359,
+                        maxHeight: 720
+                    }
+                }
+            });
+
+            // Error handling
+            player.addEventListener('error', (event) => {
+                const error = event.detail;
+                console.error('Player error:', error);
+                errorMessageEl.textContent = `Error: ${error.message || 'Unknown error'}`;
+            });
+
+            try {
+                // Load the stream
+                await player.load(channel.url);
+                console.log(`Now playing: ${channel.name}`);
+            } catch (error) {
+                console.error('Stream load error:', error);
+                errorMessageEl.textContent = `Failed to load stream: ${error.message || 'Unknown error'}`;
+            }
+        }
+
+        // Initialize player
+        function initFromUrlParam() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const channelName = urlParams.get('c') || 'Colors Hindi HD';
+
+            const channel = channels.find(ch => ch.name === channelName);
+            if (channel) {
+                initPlayer(channel);
+            } else {
+                console.error(`Channel not found: ${channelName}`);
+            }
+        }
+
+        // Shaka Player initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            // Install polyfills
+            shaka.polyfill.installAll();
+
+            // Check browser support
+            if (shaka.Player.isBrowserSupported()) {
+                initFromUrlParam();
+            } else {
+                console.error('Browser not supported');
+                const errorMessageEl = document.getElementById('error-message');
+                errorMessageEl.textContent = 'Browser does not support Shaka Player';
+            }
+        });
+    </script>
+</body>
+</html>
