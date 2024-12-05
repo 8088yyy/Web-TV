@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airtel DTH</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #player-container {
+            width: 100%;
+            height: 100vh;
+        }
+        #player {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="player-container">
+        <div id="player"></div>
+    </div>
+    
+    <script src="https://ssl.p.jwpcdn.com/player/v/8.25.1/jwplayer.js"></script>
+    <script>
+        jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
+        
+        function getParameterByName(name) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(window.location.href);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        
+        var ConfiguracionCanales = {
+    "SET": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978ac9d8fb452ad919bdf/images/378221101.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/set/ndashd/set.mpd",
+        "key": "df87b8c858ff3e808ac58e54302c04b3:094452c9aa1df2f8dd507d6235385575"
+    },
+    "SONY SAB": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978a09d8fb452ad919b3e/images/36221101.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media14/sony_sab/ndashd/sony_sab.mpd",
+        "key": "49275a5eddfd38abb2ad95e90c75b2a0:1d523581670d2f288391d91ca43b87e2"
+    },
+    "Sony Pal": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978b19d8fb452ad919c21/images/519221101.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/sony_pal/ndashd/sony_pal.mpd",
+        "key": "167101d0fd57325fb9124d8c478a63d8:2002e1f0f2c1665afffcd6fa0dd64925"
+    },
+    "Investigation Discovery": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bff583bf8d2567aab4d6/images/424.webp",
+        "group": "Documentary",
+        "url": "https://companion-live-play1.streamready.in/live/media2/investigation_discovery/ndashd/investigation_discovery.mpd",
+        "key": "1ce668c7edf9354ca2c1c08efd50ea4a:01ef93e2f2c9e07b17a335464301f4c4"
+    },
+    "Epic": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610e623d1fb238115f8b9/images/279.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media2/epic/ndashd/epic.mpd",
+        "key": "0ee72f27c65b3de7b82949ca2d76de3a:b092f77ae2fd22576521b2f8905885bc"
+    },
+    "Ishara TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bfeb23d1fb238115e25d/images/778.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media14/ishara_tv/ndashd/ishara_tv.mpd",
+        "key": "d57fc2e5eda934f8954c95930fefedde:de286ba04a64e29cb82480ad6d4f2eeb"
+    },
+    "DD National": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657611b152133304ca060093/images/550.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_national/ndashd/dd_national.mpd",
+        "key": "e0cfcb785f8f3ca0b5f77719abca3e3c:a7331d573ef3aeafb1401ada4d7a1a67"
+    },
+    "DD India": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610f961da8470744738e1/images/456.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media10/dd_india/ndashd/dd_india.mpd",
+        "key": "4ed04e72681e324fb1cf10469d4177c3:2aa83fcaf7e0e966dbbf5d3c083baef5"
+    },
+    "DD Bharati": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6576110f6886c012a8aa294c/images/366.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_bharati/ndashd/dd_bharati.mpd",
+        "key": "e99c9fe4c778322caa4cdf2876b4584c:e2736f125bb2c4c08b24503abaa75b5f"
+    },
+    "DD Kisan": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65761106a3b7866cb8414c70/images/665.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media10/dd_kissan/ndashd/dd_kissan.mpd",
+        "key": "5c858470533b34b49028725ee43c2ae8:8e96b541bde1a21ccdc5650f855221c5"
+    },
+    "DD UP": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610e623d1fb238115f8ae/images/568.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_up/ndashd/dd_up.mpd",
+        "key": "6abe51a584e73970badcddcdc0097d3f:78c5e6a068875109b573499e3f917d6e"
+    },
+    "DD Rajasthan": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6576113851545a065210830f/images/349.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_rajasthan/ndashd/dd_rajasthan.mpd",
+        "key": "1d7a716f41dc3a60be0d1a81837e5e27:1d0ee2dfab371d87151e6f78d44e463f"
+    },
+    "DD MP": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6616ec3851d9d7117a501879/images/399.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media10/dd_mp/ndashd/dd_mp.mpd",
+        "key": "c88874cdd33c3240a4ccc20b8bf9000f:4839c814b2e0e81da72baeff94327e82"
+    },
+    "SONY Max": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f1fd033abf53d08e75ac/images/97221101.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media1/sony_max/ndashd/sony_max.mpd",
+        "key": "d46d955693433b9f9249f4dffd6f016b:22d33ed8879ddd6e4eda0bee6e2055f1"
+    },
+    "Sony Max 2": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f584fe0772265fedff18/images/13221101.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media14/sony_max_2/ndashd/sony_max_2.mpd",
+        "key": "c23701522dc53a78a3869ee6b1d2d8f5:4f2a47857d6724c84852447cdcb02765"
+    },
+    "Sony Wah": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f4d8033abf53d08e93a2/images/294221101.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media14/sony_wah/ndashd/sony_wah.mpd",
+        "key": "6ccacc3e29e438faaabbc8f7cb8d1fe7:d8b40fedaf5d18f69c7061dfcfbfa407"
+    },
+    "B4U Kadak": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f8effe0772265fee2350/images/179.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media2/b4u_kadak/ndashd/b4u_kadak.mpd",
+        "key": "6b56fdae345237b690052e5007f00ee5:4fa3289f47007bc93d15c01bac096534"
+    },
+    "B4U Movies": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572ef03dc5dfc4403f7a33a/images/650.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media1/b4u_movies/ndashd/b4u_movies.mpd",
+        "key": "5c492058ca0c3666a372c84c5a3379c9:f841ff79eca11ae0603ea08155b5cca8"
+    },
+    "MH One Dil Se": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572ef81033abf53d08e5b99/images/887.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media14/mh_one_dil_se/ndashd/mh_one_dil_se.mpd",
+        "key": "89c2689ca67732689761fc3fb73a03da:e74667a42a1ca4628b2d691abf047d26"
+    },
+    "SONY PIX": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6579791fac7f66229607bd43/images/277221101.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media4/sony_pix/ndashd/sony_pix.mpd",
+        "key": "b744ae0cabae3998bbfbd778d537f049:9d10c52b46a7d909b69c4d5edf569b5a"
+    },
+    "Movies Now": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574c00debd2ee1bebbf9c51/images/503.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media3/movies_now/ndashd/movies_now.mpd",
+        "key": "0029d27f5d4437879020e1cdcdc855bd:7a0213446ea299994924b22977ed2d47"
+    },
+    "MN+": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65a046277849cc653ced0ed6/images/LANDSCAPE_169/LANDSCAPE_169_xL_ScvEc7_MN+_264x144.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media6/mn_plus/ndashd/mn_plus.mpd",
+        "key": "3b23acb3900b30159ac58e8c68d1586e:2b99d10db99fc8ad852831e5076d92c3"
+    },
+    "Romedy Now": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978ac9d8fb452ad919bd7/images/347.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media3/romedy_now/ndashd/romedy_now.mpd",
+        "key": "102a7032ac813bb596c9c5261d1118e8:f6031465405a51979a6356477f098555"
+    },
+    "MNX": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65a0462994ec8e00c48d19c3/images/LANDSCAPE_169/LANDSCAPE_169_PDye_Z5Fz_MNX_264x144.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media3/mnx/ndashd/mnx.mpd",
+        "key": "919c9589c9ee336f889f2a0a4bf13d8f:3aca899e6192c795edf692d81725a797"
+    },
+    "SONY SPORTS TEN 1": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978a125986346a8f0e23b/images/SONY-SPORTS-TEN-1_264x144.webp",
+        "group": "Sports",
+        "url": "https://companion-live-play1.streamready.in/live/media13/sony_sports_ten_1/ndashd/sony_sports_ten_1.mpd",
+        "key": "6e794cec33be346db4544184c0b67dc6:ecb88f00e50f64333123c78a47ea75d0"
+    },
+    "SONY SPORTS TEN 2": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978a09d8fb452ad919b43/images/385221101.webp",
+        "group": "Sports",
+        "url": "https://companion-live-play1.streamready.in/live/media13/sony_sports_ten_2/ndashd/sony_sports_ten_2.mpd",
+        "key": "37903444123537789b4925f79e21b6d7:8c00f6c537e4b87baf5d6a7dc982e409"
+    },
+    "SONY SPORTS TEN 3": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978a09d8fb452ad919b44/images/386221101.webp",
+        "group": "Sports",
+        "url": "https://companion-live-play1.streamready.in/live/media13/sony_sports_ten_3/ndashd/sony_sports_ten_3.mpd",
+        "key": "ec2d298cc5943dbfb2fd1b75d54c4c9a:bb2c99d764f17b708e7cdd5878535b4e"
+    },
+    "SONY SPORTS TEN 5": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978a1c5625a16ee72e8ff/images/449221101.webp",
+        "group": "Sports",
+        "url": "https://companion-live-play1.streamready.in/live/media4/sony_sports_ten_5/ndashd/sony_sports_ten_5.mpd",
+        "key": "aa0cc480a31637bca87bced5a3ce3c75:fe20e478d71d67c248c67837b4692118"
+    },
+    "DD Sports": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610ee83bf8d2567aaca6a/images/667.webp",
+        "group": "Sports",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_sports/ndashd/dd_sports.mpd",
+        "key": "8432f0d30cb8340c9eb7823ea0e501a8:29527903a014cb1bdc62a1cb486887ee"
+    },
+    "Eurosport": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bfe21d2c0e2cbafc1adb/images/19.webp",
+        "group": "Sports",
+        "url": "https://companion-live-play1.streamready.in/live/media11/eurosport/ndashd/eurosport.mpd",
+        "key": "d29f9cc2592833ab83522ffa033ab71f:ed09ed7a6d148026e5a0555f3e32630a"
+    },
+    "ABP News": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572eedd033abf53d08e53f8/images/LANDSCAPE_169/LANDSCAPE_169_t9XCpWn0A_ABP-NEWS-LOGO_264x144.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media14/abp_news/ndashd/abp_news.mpd",
+        "key": "f8f44a4f28533484ba96362d7bd5e96f:3311ab1ca6e4df8b3fd7093190faffbb"
+    },
+    "Aaj Tak": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572eec8fe0772265fedb972/images/566.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media1/aaj_tak/ndashd/aaj_tak.mpd",
+        "key": "22274ee0087b33b8a925c7463c792eff:741b9f3d3fa7fde05b19f2a79f293318"
+    },
+    "India TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bff251545a0652105dfd/images/546.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media1/india_tv/ndashd/india_tv.mpd",
+        "key": "c10c62fcfafd3ff189ef85480b9c7988:bd94ae47aaa8e9880c5f95e8b32c0330"
+    },
+    "R Bharat": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978cea9540e6b3ede3fb6/images/8.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media14/r_bharat/ndashd/r_bharat.mpd",
+        "key": "a7c43a2f41043a758b1bbd1dfdcb5c90:b7785e4dd461bcbb05604423d4add024"
+    },
+    "NDTV India": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bff4885fc401d48ff794/images/304.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media3/ndtv_india/ndashd/ndtv_india.mpd",
+        "key": "f336d1c226f6308786b87067687cc60e:8b09d754b244fc1580e00115bc2a63ae"
+    },
+    "TV9 Bharatvarsh": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978cbc5625a16ee72ec36/images/420.webp",
+        "group": "News",
+        "url": "https://vg-tv9live.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-320325/main.m3u8?ads.partner=airtel",
+        "key": "f336d1c226f6308786b87067687cc60e:8b09d754b244fc1580e00115bc2a63ae"
+    },
+    "News Nation": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6579788f8d36cd1598f95f1f/images/577.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media3/news_nation/ndashd/news_nation.mpd",
+        "key": "6e4e7ea9ad9c3b128ebd2e7dac83ef47:b7d8230b2c4e518fb0a8e00217765604"
+    },
+    "Good News Today": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bfeb23d1fb238115e252/images/618.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media2/good_news_today/ndashd/good_news_today.mpd",
+        "key": "84547885167239d8825a012c8f1996d9:83b2de8db5661999615d5822b1d13446"
+    },
+    "Times Now Navbharat": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978c1c5625a16ee72eb49/images/818220423.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media14/times_now_navbharat/ndashd/times_now_navbharat.mpd",
+        "key": "2aadec05e909366aa4870267b850aee5:7a89dd14b89959f633b385bd5fcfd6c8"
+    },
+    "News24": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978a59d8fb452ad919b7e/images/556.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media3/news24/ndashd/news24.mpd",
+        "key": "1cd45425036b309db1e9724da73cbee0:923ecbc3b0ead639fbe76abcc56572d2"
+    },
+    "ET NOW SWADESH": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65761110e533e2124e759923/images/813.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media13/et_now_swadesh/ndashd/et_now_swadesh.mpd",
+        "key": "98614f133df434aa85073a2ba7c61c03:3764151be113023ec8fe62ae297cf465"
+    },
+    "DD News": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610ed83bf8d2567aaca69/images/447.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_news/ndashd/dd_news.mpd",
+        "key": "e8054e1b63613841bc6d55eb99c7292a:f06eff4bcdf3c21e97138ac761f8280e"
+    },
+    "TIMES NOW": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657979ba9d8fb452ad91a99f/images/63.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media4/times_now/ndashd/times_now.mpd",
+        "key": "6a2674bed4e63657acb2411d862e3974:d5028b362b29bc4d5e9b2c59e970f1dc"
+    },
+    "NDTV 24x7": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572ef92033abf53d08e5c5c/images/623.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media3/ndtv_24x7/ndashd/ndtv_24x7.mpd",
+        "key": "5183954ec5f93d949038f9c6ee5a70a9:2c645e0e3df11e8a3ab7493a622b8455"
+    },
+    "INDIA TODAY": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574c019ebd2ee1bebbf9ca6/images/487.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media2/india_today/ndashd/india_today.mpd",
+        "key": "22f2b116ca563ef2b3f1d370a16a9c89:e2dc911b7617c4657a01e829367d790b"
+    },
+    "MIRROR NOW": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bff751545a0652105e7d/images/482.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media2/mirror_now/ndashd/mirror_now.mpd",
+        "key": "2da58f9d805236069409e14c2bf1cda9:e3b9e3ccf07e55bb41102af856a61c93"
+    },
+    "ET Now": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65761110e533e2124e75991e/images/613.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media2/et_now/ndashd/et_now.mpd",
+        "key": "7dea47d70b3f36f092eeaccd792f48c5:fa55decf60e12e2d4af241b5dcfd070e"
+    },
+    "NDTV Profit Prime": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574c00debd2ee1bebbf9c52/images/157.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media3/ndtv_profit_prime/ndashd/ndtv_profit_prime.mpd",
+        "key": "525e82617cb335a59ffc3792fe187d08:da64524a80b2e5470931885855c33217"
+    },
+    "CNN International": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6576112751545a065210815b/images/232.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media14/cnn_international/ndashd/cnn_international.mpd",
+        "key": "bd0f832ba14d3d9e864dd067c282140d:8e1f44e89e9f2085025aeb17129223d7"
+    },
+    "BBC News": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610e883bf8d2567aaca21/images/172230519.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media2/bbc_news/ndashd/bbc_news.mpd",
+        "key": "3597aae67bab30508266ebf084f40106:50f8ea0a8851def4bb589ec02604a19b"
+    },
+    "TLC": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978ab25986346a8f0e2f1/images/275.webp",
+        "group": "Lifestyle",
+        "url": "https://companion-live-play1.streamready.in/live/media4/tlc/ndashd/tlc.mpd",
+        "key": "f3afab93ca6834b29c466c3312a58eb9:0a697307b408a8abe7460a88407398f6"
+    },
+    "GOOD TiMES": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bfe21d2c0e2cbafc1adf/images/468.webp",
+        "group": "Lifestyle",
+        "url": "https://companion-live-play1.streamready.in/live/media2/good_times/ndashd/good_times.mpd",
+        "key": "848750012f9c3bde82799f96b07a6161:5b9fce1c843da7bd519cf0fb79d61676"
+    },
+    "Travelxp": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978c3c5625a16ee72eb73/images/412.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media4/travelxp/ndashd/travelxp.mpd",
+        "key": "733e53683ab43db8a9a28d3e5c5c6342:64229714fb07cf96c5221536fa67caf5"
+    },
+    "Discovery Channel": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65761105e533e2124e759846/images/313.webp",
+        "group": "Documentary",
+        "url": "https://companion-live-play1.streamready.in/live/media1/discovery_channel/ndashd/discovery_channel.mpd",
+        "key": "97edea2a7c37373e810d03f6441c7b2c:b8c76ec061878fe2a4a801907a515179"
+    },
+    "Animal Planet": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610e283bf8d2567aac9d7/images/262.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/animal_planet/ndashd/animal_planet.mpd",
+        "key": "1826a27346ee3546b68b65cf369d6171:f20616a6c1292abed2ba6c3aafc61540"
+    },
+    "Discovery Science": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65761111a3b7866cb8414d76/images/110.webp",
+        "group": "Documentary",
+        "url": "https://companion-live-play1.streamready.in/live/media13/discovery_science/ndashd/discovery_science.mpd",
+        "key": "2241443a13b439d5a741a7bd6915b354:8df3f646d7378dac47aa70b041fe3999"
+    },
+    "Discovery Turbo": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610e623d1fb238115f8b3/images/303.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media14/discovery_turbo/ndashd/discovery_turbo.mpd",
+        "key": "be1ca994bc243a9fb997cb71932c9269:4b4d9b54a8aa08696d4959db80e3e6a7"
+    },
+    "Sony BBC earth": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f5e6033abf53d08e9e78/images/163221101.webp",
+        "group": "Documentary",
+        "url": "https://companion-live-play1.streamready.in/live/media13/sony_bbc_earth/ndashd/sony_bbc_earth.mpd",
+        "key": "0aada281b4a0349daad3b87bebd9a40a:8ae627c083b99207f8221ac2afcc3243"
+    },
+    "SANSAD TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736e891cd2bb19dca31199/images/384.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media14/sansad_tv/ndashd/sansad_tv.mpd",
+        "key": "f87095d5be083446871c726475641c90:12688f091369dabec4e20338c5590bfe"
+    },
+    "Gyandarshan": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bfeb23d1fb238115e255/images/132.webp",
+        "group": "Educational",
+        "url": "https://companion-live-play1.streamready.in/live/media10/gyandarshan/ndashd/gyandarshan.mpd",
+        "key": "21e42f32ecbe31cf8d704f523cbb787a:09ecdc5e366638bcbabb5e5aeae78e62"
+    },
+    "Cartoon Network": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572ef03dc5dfc4403f7a33c/images/594.webp",
+        "group": "Kids",
+        "url": "https://companion-live-play1.streamready.in/live/media3/cartoon_network/ndashd/cartoon_network.mpd",
+        "key": "bef75a8c91e238089d17aabf8a32fcd8:1f0ee2f4af859cf5de7f98fe0f96f075"
+    },
+    "Pogo": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978a69d8fb452ad919b83/images/494.webp",
+        "group": "Kids",
+        "url": "https://companion-live-play1.streamready.in/live/media4/pogo/ndashd/pogo.mpd",
+        "key": "60e3db5b69203c6e882b52e9767b5f76:7d1640bce412b08f20b71a2226e5609e"
+    },
+    "Discovery Kids": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610e623d1fb238115f8b8/images/169.webp",
+        "group": "Kids",
+        "url": "https://companion-live-play1.streamready.in/live/media1/discovery_kids/ndashd/discovery_kids.mpd",
+        "key": "3eec4a1a86f53202b33fa368ba56481d:13f023cd7173da9623e41493467046c3"
+    },
+    "CBeebies": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f29d033abf53d08e7c80/images/739.webp",
+        "group": "Kids",
+        "url": "https://companion-live-play1.streamready.in/live/media13/cbeebies/ndashd/cbeebies.mpd",
+        "key": "098598e2a73d33319379082e6e362e87:a8bccd85aea6ca38abe2a5b1c58cc0e9"
+    },
+    "Gubbare": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bff483bf8d2567aab4d1/images/770.webp",
+        "group": "Kids",
+        "url": "https://companion-live-play1.streamready.in/live/media14/gubbare/ndashd/gubbare.mpd",
+        "key": "cde3379bf61d323ca1d60f8c14c4d0d3:6a2a37188c98c4869736d85c29952b07"
+    },
+    "Sony Yay": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978bbac7f66229607b5db/images/189221101.webp",
+        "group": "Kids",
+        "url": "https://companion-live-play1.streamready.in/live/media11/sony_yay/ndashd/sony_yay.mpd",
+        "key": "bea660d6490d30d8a21b69db6730e322:8bd64c3a5a5ca59ef7c25c9adc40e648"
+    },
+    "B4U Music": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610f151545a0652107a65/images/527.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media4/b4u_music/ndashd/b4u_music.mpd",
+        "key": "7fe4b4b9c1bc3ddea40a29c96aa56c37:6bfddc3b50d6d782748f5a7184356da4"
+    },
+    "Mastiii": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574c034e533e2124e758025/images/400.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media2/mastiii/ndashd/mastiii.mpd",
+        "key": "5bb8a26cb0ed35798f54910e1cf04333:2dd8b2fe0ec976ecf2d74c1fb322558f"
+    },
+    "Showbox": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978af9b315d22c1f80b77/images/565.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media14/showbox/ndashd/showbox.mpd",
+        "key": "33307c8eaf953a609d7060ad96f0f284:5d35465bd077f9bd00ae00b5e517190c"
+    },
+    "Zoom": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6579794e25986346a8f0edcf/images/51.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media3/zoom/ndashd/zoom.mpd",
+        "key": "24ea9b12b6113236ae745bdd417c6a49:d398049e87090ab2f2dfd7373883e6c7"
+    },
+    "Sony Marathi": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978e36cbc4372820a5a9c/images/351221101.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media14/sony_marathi/ndashd/sony_marathi.mpd",
+        "key": "28fd7bb19b9430608489f48e4638555e:9482c2ce1e97f1b2f6814841e6afcc32"
+    },
+    "Fakt Marathi": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f968fe0772265fee2883/images/295.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media2/fakt_marathi/ndashd/fakt_marathi.mpd",
+        "key": "97c02ac374da3d588ebf694ee9c29ac0:63e74f391a554c863642031a52cddcbd"
+    },
+    "ABP Majha": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f15cfe0772265fedd308/images/615.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media1/abp_majha/ndashd/abp_majha.mpd",
+        "key": "bd240d5f2ebb30d1994388010747cd10:da6fce9410d69732618170484d613b81"
+    },
+    "Saam TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978d211ea19309d4c5be8/images/38.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media3/saam_tv/ndashd/saam_tv.mpd",
+        "key": "6785533705883c0282a77cd8accfd7c1:0c3040f192de0f73bc6e9be91dd45bb2"
+    },
+    "TV9 Marathi": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bff023d1fb238115e320/images/533.webp",
+        "group": "News",
+        "url": "https://vg-tv9live.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-865266/main.m3u8?ads.partner=airtel",
+        "key": "6785533705883c0282a77cd8accfd7c1:0c3040f192de0f73bc6e9be91dd45bb2"
+    },
+    "DD Sahyadri": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657611a9e533e2124e75aae4/images/292.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media10/dd_sahyadri/ndashd/dd_sahyadri.mpd",
+        "key": "8fee8ee758d639ecba383f207ff251f0:9f2629c41850e8e6fe90abb7157ffc89"
+    },
+    "PTC Punjabi": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978979383dc75068840db/images/231.webp",
+        "group": "Devotional",
+        "url": "https://companion-live-play1.streamready.in/live/media1/ptc_punjabi/ndashd/ptc_punjabi.mpd",
+        "key": "c7889f78a20a3cfe94ae1302c5808f75:a1b025d54dd334eda9b266453851f3a8"
+    },
+    "Pitaara": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736f0c1cd2bb19dca31753/images/280.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media14/pitaara/ndashd/pitaara.mpd",
+        "key": "a4f55725282830c69d4b49f0bd09411f:50c2a9665cd4dac2ad58f9cca7815319"
+    },
+    "PTC Simran": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f5c9033abf53d08e9d33/images/506.webp",
+        "group": "Devotional",
+        "url": "https://companion-live-play1.streamready.in/live/media14/ptc_simran/ndashd/ptc_simran.mpd",
+        "key": "b4fffa1377ad38f38fd82293a438f71b:1db2d7a0c2827d4619332301ff3064d7"
+    },
+    "MH1": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574c00ef03c4100b4b695bc/images/360.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media2/mh1/ndashd/mh1.mpd",
+        "key": "79168b41459e3fc7881f763a36ba6805:6747235f79fa89bebef69b23ea640b86"
+    },
+    "DD Punjabi": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610ec23d1fb238115f940/images/12.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_punjabi/ndashd/dd_punjabi.mpd",
+        "key": "c7d470fd7a2b3b5496760f0f5d08b3e7:6613042e35847c39378534097d608642"
+    },
+    "TV9 Gujarati": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978cd11ea19309d4c5bc0/images/284.webp",
+        "group": "News",
+        "url": "https://vg-tv9live.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-365783/main.m3u8?ads.partner=airtel",
+        "key": "c7d470fd7a2b3b5496760f0f5d08b3e7:6613042e35847c39378534097d608642"
+    },
+    "ABP Asmita": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572eedd033abf53d08e53ee/images/287.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media14/abp_asmita/ndashd/abp_asmita.mpd",
+        "key": "2f1676373aa2300784dab4419fcf48df:75908ba4b14f4531f096e5f6fd4c0014"
+    },
+    "DD Girnar": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610ec23d1fb238115f939/images/78.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media10/dd_girnar/ndashd/dd_girnar.mpd",
+        "key": "0e8474dda383378b80ade66d41c74ced:4db0497c24e0fe9ff7b3e305a5de393e"
+    },
+    "Tarang": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736ea2ded97660c182a72d/images/443.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media2/tarang_tv/ndashd/tarang_tv.mpd",
+        "key": "29b13d760ad13d08abef07e76922b889:56280300a93a18c13042a24f04c542d9"
+    },
+    "Prarthana TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f369033abf53d08e8453/images/290.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media2/prarthana_tv/ndashd/prarthana_tv.mpd",
+        "key": "7312dbb2fcb7300999c2d4f240fb08bd:bf5e5a7d1efaa51f7d792bcf23a58862"
+    },
+    "SIDHARTH TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f0f7033abf53d08e6a9d/images/839.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media14/sidharth_tv/ndashd/sidharth_tv.mpd",
+        "key": "615ce78c2b3332abb2ad378703efc3b7:fd34da01263c5d2949a214ceac6926f0"
+    },
+    "Alankar": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610f623d1fb238115faff/images/46.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media14/alankar/ndashd/alankar.mpd",
+        "key": "875344a609c338e597cde022d8594e5d:9714a7dc1907664a6bf37d286a58c3e7"
+    },
+    "SIDHARTH GOLD": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f11e033abf53d08e6c8e/images/841.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media14/sidharth_gold/ndashd/sidharth_gold.mpd",
+        "key": "d4012b4abaca30839ca884903ffedd20:b44b19e2f06485595e3ddea7eb2698f2"
+    },
+    "OTV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657764159f7e407f8ff23c00/images/319.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media1/otv/ndashd/otv.mpd",
+        "key": "f406fffea9d6310a9b8bda9001ee7bb8:aeb361056a1394e343c49c4860072b08"
+    },
+    "Tarang Music": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736e9dded97660c182a613/images/636.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media4/tarang_music/ndashd/tarang_music.mpd",
+        "key": "a0c5f183294233f380c91f9bfafc0c2f:fe3b50c26497a4499075e483800e79eb"
+    },
+    "Jay JAGANNATH": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736e950230904c4f276017/images/928.webp",
+        "group": "Religious",
+        "url": "https://companion-live-play1.streamready.in/live/media13/jay_jagannath/ndashd/jay_jagannath.mpd",
+        "key": "ab188f0b3d1532e6aaa798c869d5fd21:277872e8048b548da4e12be78d078d55"
+    },
+    "SIDHARTH BHAKTI": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f12cdc5dfc4403f7bbea/images/840.webp",
+        "group": "Religious",
+        "url": "https://companion-live-play1.streamready.in/live/media14/sidharth_bhakti/ndashd/sidharth_bhakti.mpd",
+        "key": "a2c7a5d69549393280a56c3d3056d74e:fe103f04ee53f8ebdbe5e73e6f0d62c7"
+    },
+    "DD Oriya": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610f961da8470744738e7/images/155.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_oriya/ndashd/dd_oriya.mpd",
+        "key": "9a7c8d8333bf32a8a54474a17b504e87:e0ab16c481675ba30c66a0d4b323ff54"
+    },
+    "DD Urdu": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610e623d1fb238115f8af/images/466.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_urdu/ndashd/dd_urdu.mpd",
+        "key": "4690c214423e3cb7a5f5fcad17d7f673:9213d6c3e9396eb6185412d15c1cad82"
+    },
+    "DD Kashir": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610f961da8470744738e6/images/273.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media10/dd_kashir/ndashd/dd_kashir.mpd",
+        "key": "fb48058fbc1d3bb6bd7abd3bfe4a9162:3213912e94d7d8cca278e9e59202f48d"
+    },
+    "Rengoni TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bffd1d2c0e2cbafc1d91/images/242.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media3/rengoni_tv/ndashd/rengoni_tv.mpd",
+        "key": "5ad1b41bba973ed2a830efcb6ff4a905:aae094ab25f62dedb1fd9b2e3de13dda"
+    },
+    "DD Imphal": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610ec23d1fb238115f93b/images/23.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media10/dd_imphal/ndashd/dd_imphal.mpd",
+        "key": "fc68a31ebda13403858c0f08f866eb5f:e67b2eb340b3713005318c6d176a6f66"
+    },
+    "DD North East": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6576110f6886c012a8aa2950/images/LANDSCAPE_169/LANDSCAPE_169_FSJdlxo_n_DD-North-East_264x144.webp",
+        "group": "Infotainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_north_east/ndashd/dd_north_east.mpd",
+        "key": "b885917361193c7190960d8727838956:478574c3fc368154a99ed4755bc5c6f3"
+    },
+    "B4U Bhojpuri": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572ef49fe0772265fedbf4c/images/307.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media1/b4u_bhojpuri/ndashd/b4u_bhojpuri.mpd",
+        "key": "2820e5c4803433adb14c8b6189ec51ba:e53a9ab7d78e73a318e0e2cfd69001ac"
+    },
+    "Filamchi Bhojpuri": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bfeb23d1fb238115e24a/images/736.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media14/filamchi_bhojpuri/ndashd/filamchi_bhojpuri.mpd",
+        "key": "1b915fb287a7380a9fc41703912a5b49:251f8f8722ec8c1fbd3f8502522789fb"
+    },
+    "DD Bihar": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6576113851545a0652108306/images/514.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media10/dd_bihar/ndashd/dd_bihar.mpd",
+        "key": "ae147c396473369e93ca65899f801e9f:26dc9871e1a282db4c5180e89118ed98"
+    },
+    "Aastha": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572eed7033abf53d08e53b4/images/491.webp",
+        "group": "Devotional",
+        "url": "https://companion-live-play1.streamready.in/live/media1/aastha/ndashd/aastha.mpd",
+        "key": "a3498e348d1d3b0cbc1071b8731d611b:5ce5d065b83066d916b9bfeb609d25ee"
+    },
+    "Sanskar": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978ad9b315d22c1f80b64/images/557.webp",
+        "group": "Devotional",
+        "url": "https://companion-live-play1.streamready.in/live/media3/sanskar/ndashd/sanskar.mpd",
+        "key": "f882129215803c82b82d93588aa58a8a:2e26f95f7cff6bd0868c52705a3736ab"
+    },
+    "MH One Shraddha": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bff5e533e2124e757677/images/20.webp",
+        "group": "Religious",
+        "url": "https://companion-live-play1.streamready.in/live/media4/mh_one_shraddha/ndashd/mh_one_shraddha.mpd",
+        "key": "711f43c497a83fd9a949a896a14c10e9:1763661fadeee1d4d07e46eb6127adba"
+    },
+    "Divya TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65761107a3b7866cb8414c72/images/107.webp",
+        "group": "Devotional",
+        "url": "https://companion-live-play1.streamready.in/live/media2/divya_tv/ndashd/divya_tv.mpd",
+        "key": "205182a1550b365db1156cf76f529bf1:260011c0acaa754846e6d89eb834e957"
+    },
+    "Satsang": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978f68d36cd1598f9677a/images/642.webp",
+        "group": "Devotional",
+        "url": "https://companion-live-play1.streamready.in/live/media14/satsang/ndashd/satsang.mpd",
+        "key": "03a398ea18773544b6e378c5304b183a:9508bbc4aeaa87a91c6fb1dba9a60215"
+    },
+    "Sony 8": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657978fb8d36cd1598f967c9/images/LANDSCAPE_169/LANDSCAPE_169_Jk_mm6AZZ_Sony-AATH_264x144-copy.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media14/sony_aath/ndashd/sony_aath.mpd",
+        "key": "ec57587dcfe739c69741dfc81f037512:d96782693a98c4c9940d2ee51ab33183"
+    },
+    "Enterr10 Bangla": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f323fe0772265fede4ba/images/76.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/enterr10_bangla/ndashd/enterr10_bangla.mpd",
+        "key": "e7e91642d9713e6b89c0268a70003b4e:a4072845adf7ee188a001ca940b5acae"
+    },
+    "Rongeen Tv": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574c00b885fc401d48ff875/images/910.webp",
+        "group": "Kids",
+        "url": "https://companion-live-play1.streamready.in/live/media14/rongeen_tv/ndashd/rongeen_tv.mpd",
+        "key": "0fe14048d43139d2bab489918d2896ac:bcdb76ba833b9183d843cc449dd633f2"
+    },
+    "ABP Ananda": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572eecefe0772265fedb9da/images/LANDSCAPE_169/LANDSCAPE_169_hfSOYTVDB_ABP-Ananda.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media14/abp_ananda/ndashd/abp_ananda.mpd",
+        "key": "edadec08c9673bd789dd896293ae7f31:2953380ac768a95689bd85a5da6f3b63"
+    },
+    "TV9 Bangla": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bfffe533e2124e7577d7/images/775.webp",
+        "group": "News",
+        "url": "https://vg-tv9live.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-683682/main.m3u8?ads.partner=airtel",
+        "key": "edadec08c9673bd789dd896293ae7f31:2953380ac768a95689bd85a5da6f3b63"
+    },
+    "R. Bangla": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574c00b885fc401d48ff870/images/780.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media14/r_bangla/ndashd/r_bangla.mpd",
+        "key": "d22b394080fd314a8e410a710d5f0731:8045b94f1a60de6117e9aaede00a9a87"
+    },
+    "DD Bangla": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657611a052133304ca05ffc7/images/478.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_bangla/ndashd/dd_bangla.mpd",
+        "key": "ab55d16a8f5d3af3adfcd981bb0804cc:d0e14e5175edd65a5d4e10ec6a85ec0c"
+    },
+    "Raj Digital Plus": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f46dfe0772265fedf316/images/660.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media3/raj_digital_plus/ndashd/raj_digital_plus.mpd",
+        "key": "c71cd6d837af36c28af0789667a9bd47:cc761b46d46f145dd6a1436e0d970214"
+    },
+    "Mega TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f3cdfe0772265fedec1a/images/117.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media2/mega_tv/ndashd/mega_tv.mpd",
+        "key": "6d83a67ea8193e659d169444066bd3de:e180bb49ff826d7507b03dfec1e678f3"
+    },
+    "Puthu Yugam": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f5bc033abf53d08e9ca4/images/638.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media3/puthu_yugam/ndashd/puthu_yugam.mpd",
+        "key": "f311b6837dba38269368f4dad91d7ca7:b508424a43fc6873ddabeb3b301e90cd"
+    },
+    "Kalaignar TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574c00083bf8d2567aab540/images/605.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media13/kalaignar_tv/ndashd/kalaignar_tv.mpd",
+        "key": "06aef0e7e72337e6ac9216263ada74c0:2b9b31ce2dbeee366760f5d2b48692b0"
+    },
+    "Jaya TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736e86ded97660c182a101/images/221.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media6/jaya_tv/ndashd/jaya_tv.mpd",
+        "key": "26a4d044b032358a96f39a6c672d84a7:a4c4456a908628701403f02f55dbc6ec"
+    },
+    "Raj TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572fc4efe0772265fee4867/images/336.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media3/raj_tv/ndashd/raj_tv.mpd",
+        "key": "0e504f4387a43780974c3136d9ad4056:13d25845d68f595781f1a1db8c08b7d7"
+    },
+    "Sirippoli": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65776428359b7130a1f47c0a/images/354.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media4/sirippoli/ndashd/sirippoli.mpd",
+        "key": "72a127ad6acb351b8fe147d9990e4b6b:3faff6e110faf3f1fa7b4da75216f0ce"
+    },
+    "Vasanth TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572fde6fe0772265fee5b84/images/327.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media14/vasanth_tv/ndashd/vasanth_tv.mpd",
+        "key": "06026c5cb0ae3986956ab857931a1cb9:1a68d832df896ef7e4c7779521c6c522"
+    },
+    "Mega 24": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572fba8fe0772265fee40f6/images/886.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media13/mega_24/ndashd/mega_24.mpd",
+        "key": "05dca81dfac83d0c8fd4e85063e4048a:43132ac274d942aee093cf0d22c31460"
+    },
+    "J Movies": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736ee9d21a0c75770864e1/images/652.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media2/j_movies/ndashd/j_movies.mpd",
+        "key": "cf0a673ee09e38a697e014f4d33757e9:0d2ee608ed9acbe5aae3cab7de83cc70"
+    },
+    "Murasu": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574c01be533e2124e757cf6/images/170.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media3/murasu/ndashd/murasu.mpd",
+        "key": "7382de8734193cce8717dd7adbdd656f:4b2f177f02adc514a4dfd2edaf6f49d1"
+    },
+    "Puthiya Thalaimurai": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f032033abf53d08e6245/images/481.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media3/puthiya_thalaimurai/ndashd/puthiya_thalaimurai.mpd",
+        "key": "320f1c20490b33388d14ef52257aba58:6c8c9321ac4f8370925c65cad6cc62a9"
+    },
+    "Seithigal 24x7": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f522fe0772265fedfb18/images/560.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media13/seithigal_24x7/ndashd/seithigal_24x7.mpd",
+        "key": "0a0876e228b930a489a0e2fc68a1fa25:f432d8615e81c63ea2d482c0d3b34456"
+    },
+    "Jaya Plus": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736e97ded97660c182a4b2/images/230.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media2/jaya_plus/ndashd/jaya_plus.mpd",
+        "key": "52224dc7cf81313d807aa9a1c18b63ee:0ccc5ff04b1a70a5f877d1ec29042dc6"
+    },
+    "Sathiyam TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f07d033abf53d08e6559/images/630.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media3/sathiyam_tv/ndashd/sathiyam_tv.mpd",
+        "key": "b353331acc8d3d88bfc56e7fb0b3b391:6c928c8cd63d1e73a9a00a4731368849"
+    },
+    "Raj News Tamil": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f455fe0772265fedf203/images/LANDSCAPE_169/LANDSCAPE_169_EpteuOwxr_Raj-news-tamil_264x144.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media13/raj_news/ndashd/raj_news.mpd",
+        "key": "336499f30a743b47b30d4f2dc00dd1be:49ccad7889ac3cccb43d93080617916a"
+    },
+    "D Tamil": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572ef93fe0772265fedc26d/images/373.webp",
+        "group": "Documentary",
+        "url": "https://companion-live-play1.streamready.in/live/media2/d_tamil/ndashd/d_tamil.mpd",
+        "key": "a9a0f20618e03c6dbef06dcb08bbcd9e:20ce1f62b1b71b7056a5cd9dcc303215"
+    },
+    "SONY SPORTS TEN 4": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f16cdc5dfc4403f7beeb/images/LANDSCAPE_169/LANDSCAPE_169_1WRe-uvTy_Sony-sports-Ten-4_264x144.webp",
+        "group": "Sports",
+        "url": "https://companion-live-play1.streamready.in/live/media13/sony_ten_4/ndashd/sony_ten_4.mpd",
+        "key": "9daff0561ac43417ad3e75b89b08ee34:c2c5a0291dbc525b5274a6c7d3ca9a18"
+    },
+    "Mega Musiq": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736e950230904c4f27602a/images/885.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media2/mega_musiq/ndashd/mega_musiq.mpd",
+        "key": "290d1df15db23da48e2e6d9d8254ab71:6d14332fd55da843305a5abc7253540f"
+    },
+    "Isai Aruvi": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bfe21d2c0e2cbafc1ae3/images/99.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media2/isai_aruvi/ndashd/isai_aruvi.mpd",
+        "key": "003073e7ac3a3904b99a72ed7889c7e7:79fde8f20b1c8d1dd2e6974043777667"
+    },
+    "Jaya Max": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736e8f0230904c4f275ef5/images/639.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media2/jaya_max/ndashd/jaya_max.mpd",
+        "key": "d4b6da07404430018555e4abf9964a23:c7fbcf108429ddf6e528b84db6518b23"
+    },
+    "Raj Musix Tamil": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65d3b5998dca8201dffa8504/images/LANDSCAPE_169/LANDSCAPE_169_rPMthZpUL_Raj-Musix-tamil_264x144.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media13/raj_musix_tamil/ndashd/raj_musix_tamil.mpd",
+        "key": "d1b6931b9767302abd97091958cde04d:5988b65e13ed68ffc9b5ada48a9e9b2c"
+    },
+    "DD Tamil": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/DD_TAMIL/images/LANDSCAPE_169/LANDSCAPE_169_AvMnOEpSh_DD-Tamil_264x144.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_tamil/ndashd/dd_tamil.mpd",
+        "key": "17cbd93034203c59bd62df1469f21734:839a56eda559a4385be2a5a2cafada28"
+    },
+    "Mazhavil Manorama": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bff251545a0652105e03/images/5.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media2/mazhavil_manorama/ndashd/mazhavil_manorama.mpd",
+        "key": "3a962d4c9ea430ffa2114c9a32804d6c:da734a11c03cc0cb142467ecbfec2c08"
+    },
+    "Flowers TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f2cb033abf53d08e7e18/images/442.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media2/flowers_tv/ndashd/flowers_tv.mpd",
+        "key": "5e2448102e913cc89107f82fcf17619c:aec44191049b248d2545656eb0d428f6"
+    },
+    "Asianet News": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65a0461aaa41b21ae460a1b8/images/LANDSCAPE_169/LANDSCAPE_169_hMw_9cMa-_DAsianet-News_264x144.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media1/asianet_news/ndashd/asianet_news.mpd",
+        "key": "02c5d50e77323a739ec587c8d176367c:a31b057b7831b946ccb8c46a178511bb"
+    },
+    "Twenty Four": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f231033abf53d08e7832/images/644.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media4/twenty_four/ndashd/twenty_four.mpd",
+        "key": "999fcdfe30f03f59ad7af400e7b226b6:a4ea895305973755113adc4b5e1d1845"
+    },
+    "DD Malayalam": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610ec23d1fb238115f943/images/199.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media1/dd_malayalam/ndashd/dd_malayalam.mpd",
+        "key": "d8e13b377f5e3be5a0007bfd2eabb4a8:897bebc6bba662fe1b898c486349a183"
+    },
+    "TV9 Telugu News": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6574bffa83bf8d2567aab4f9/images/496.webp",
+        "group": "News",
+        "url": "https://vg-tv9live.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-277772/main.m3u8?ads.partner=airtel",
+        "key": "d8e13b377f5e3be5a0007bfd2eabb4a8:897bebc6bba662fe1b898c486349a183"
+    },
+    "NTV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f0a3dc5dfc4403f7b5a1/images/121.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media3/ntv/ndashd/ntv.mpd",
+        "key": "f9b1f33dc79b38fbb0813203ad3c0a72:884c4ca1d2d3e6fe485f84fcb0ccb456"
+    },
+    "V6 NEWS": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f4f5033abf53d08e94f2/images/190.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media14/v6_news/ndashd/v6_news.mpd",
+        "key": "f5630ec0571333658d07383a5617cda2:2f12a58067c1374811bec4b5febc43f2"
+    },
+    "10TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f11cfe0772265fedd068/images/123.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media1/10tv/ndashd/10tv.mpd",
+        "key": "2fde97a2af4e3d9ba9da1e961e62daea:4adff91df59e432b246f9564a34f580c"
+    },
+    "Bhakti TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610e283bf8d2567aac9d9/images/176.webp",
+        "group": "Religious",
+        "url": "https://companion-live-play1.streamready.in/live/media2/bhakti_tv/ndashd/bhakti_tv.mpd",
+        "key": "7832deeb25473b2da95a8fcdee2c05a2:1bf08de964b99ec51ef03a795065464c"
+    },
+    "DD Yadagiri": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610e651545a0652107952/images/555.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media10/dd_yadagiri/ndashd/dd_yadagiri.mpd",
+        "key": "4e4108e0fcb635b9b05a49460b3fb09e:79c4aa64a44ab61de4087cb15e4ba4be"
+    },
+    "DD Saptagiri": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610e623d1fb238115f8b0/images/365.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media10/dd_saptagiri/ndashd/dd_saptagiri.mpd",
+        "key": "79ac6809415233fe8f21ea56cbb48f36:999f3b1b626929fa4a4778e6dd2aacd6"
+    },
+    "SIRI KANNADA ALL TIME": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f155dc5dfc4403f7bde9/images/790.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media4/siri_kannada_all_time/ndashd/siri_kannada_all_time.mpd",
+        "key": "bfee4015ca5b3f9c855f83993dc4cb0b:820c2cb24af745bbaaa3dbb32d68bb33"
+    },
+    "PUBLIC MOVIES": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f43afe0772265fedf0d1/images/693.webp",
+        "group": "Movies",
+        "url": "https://companion-live-play1.streamready.in/live/media14/public_movies/ndashd/public_movies.mpd",
+        "key": "4f54127b9ac03bb695e61dcdbac5f1fb:dc36b78f9165b3ed1ff613781fc23bfe"
+    },
+    "Asianet Suvarna News": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65a0461aaa41b21ae460a1bb/images/LANDSCAPE_169/LANDSCAPE_169_5UD-yVOeT_Asianet-suvarna-news_264x144.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media1/asianet_suvarna_news/ndashd/asianet_suvarna_news.mpd",
+        "key": "895ebf6f1172391bbfddfafe7d004e9b:c8b5539bf310bf22b513070810ce2194"
+    },
+    "Public TV": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736eb4ded97660c182aba8/images/323.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media3/public_tv/ndashd/public_tv.mpd",
+        "key": "654d40a8ceb132ddbf37e7f371c9c605:06f57883a70510254531f41eb7ab8dc8"
+    },
+    "R.Kannada": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f3bc033abf53d08e879e/images/250231007.webp",
+        "group": "News",
+        "url": "https://companion-live-play1.streamready.in/live/media14/r_kannada/ndashd/r_kannada.mpd",
+        "key": "4ff8b5147a883d789ae9135b17a76be2:42ed6dfadf7efb120e77f910325d5829"
+    },
+    "DD Chandana": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/657610e651545a065210794b/images/535.webp",
+        "group": "Entertainment",
+        "url": "https://companion-live-play1.streamready.in/live/media10/dd_chandna/ndashd/dd_chandna.mpd",
+        "key": "bb20e5a08a493f779d1089b9ef6e5319:69f0f90ff695c58a0f401ad8471bace6"
+    },
+    "PUBLIC MUSIC": {
+        "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65736f1b1cd2bb19dca317ec/images/875.webp",
+        "group": "Music",
+        "url": "https://companion-live-play1.streamready.in/live/media14/public_music/ndashd/public_music.mpd",
+        "key": "19e43c96cd933698abc71bb34627c8f6:d0d3aebf1eb9d9e2b1f7bfc49c1a3b96"
+    }
+};
+        
+        var id = getParameterByName('c');
+        var config = ConfiguracionCanales[id];
+        
+        if (config) {
+            var sources = [];
+            
+            if (config.url.includes('.m3u8')) {
+                sources.push({
+                    file: config.url
+                });
+            }
+            
+            if (config.url.includes('.mpd') && config.key) {
+                var keys = config.key.split(':');
+                sources.push({
+                    file: config.url,
+                    drm: {
+                        clearkey: {
+                            keyId: keys[0],
+                            key: keys[1]
+                        }
+                    }
+                });
+            }
+            
+            jwplayer("player").setup({
+                playlist: [{
+                    sources: sources
+                }],
+                type: "dash",
+                width: "100%",
+                height: "100%",
+                stretching: "uniform",
+                autostart: true,
+                mute: false, // Explicitly set to unmute
+                playbackRateControls: true,
+                displaytitle: false,
+                fullscreen: {
+                    enabled: true,
+                    fallback: true
+                },
+                cast: {
+                    appid: "CC1AD845"
+                }
+            });
+            
+            jwplayer().on('error', function(error) {
+                console.error("Player Error:", error);
+            });
+        } else {
+            console.error("Invalid or missing channel ID");
+        }
+    </script>
+</body>
+</html>
