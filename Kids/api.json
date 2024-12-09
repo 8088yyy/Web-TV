@@ -1,7 +1,12 @@
-[{
+[
+{
   "name": "Hungama",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/3/35/Hungama_TV.png",
   "url": "https://play.yuvraj49.xyz/hungama/index.m3u8"
+}, {
+  "name": "Discovery Kids",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/2016_Discovery_Kids_logo.svg/500px-2016_Discovery_Kids_logo.svg.png",
+  "url": "https://8088yyydplus.vercel.app/Api/DiscoveryKids.m3u8"
 }, {
   "name": "Animax",
   "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/400/-/Animax.png",
