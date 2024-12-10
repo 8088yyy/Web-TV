@@ -212,9 +212,9 @@
                     `;
 
                     // Add click event for LIVE and UPCOMING matches
-                    if (match.isLive && match.pub_url) {
+                    if (match.isLive && match.video_url) {
                         matchCard.addEventListener('click', () => {
-                            window.location.href = `play.html?url=${match.pub_url}`;
+                            window.location.href = `play.html?url=${match.video_url}`;
                         });
                     } else if (!match.isLive) {
                         matchCard.addEventListener('click', () => {
